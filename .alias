@@ -1,0 +1,160 @@
+#FUNK
+function gacp() {
+    git add .
+    git commit -a -m "$1"
+    git push
+}
+
+function gcb() {
+    git fetch
+    git pull
+    git checkout -b "$1"
+    git push -u origin "$1"
+}
+
+function gc() {
+    git checkout "$1"
+}
+
+function branchRemoveLoop() {
+declare -a arr=(
+  "IAMQ1-212_standing-order-ajax-start-date"
+  "feature/DI-462_ajax-recent-transactions"
+  "feature/PUB-398_ImprovementsToPaymentProcess"
+  "subtask/IAMQ1-60-new-payments-design"
+  "subtask/IAMQ1-60-refactor-front-end"
+  "subtask/IAMQ1-68-payment_backend_changes"
+  "subtask/JR-26_SassSetUp"
+  )
+
+## now loop through the above array
+
+for i in "${arr[@]}"
+do
+   git branch -d "$i"
+   # or do whatever with individual element of the array
+done
+}
+
+# git checkout -b feature/border-radius-chrome-user-agent-stylesheet-fix
+# git push -u origin feature/border-radius-chrome-user-agent-stylesheet-fix
+
+# Alias
+  alias gs='git status'
+  
+  alias gpull='git pull'
+  alias gpush='git hf push'
+  alias gpulld='git pull origin develop'
+  alias gpod='git pull origin develop'
+  alias gdiff='git diff'
+  alias gd='git diff'
+  
+  
+  alias gst='git stash'
+  alias gstp='git stash pop'
+  
+  alias reset='git reset --hard'
+  alias clean='git clean -f -d'
+  alias resetclean='git reset --hard && git clean -f'
+  alias nuke='git reset --hard && git clean -f -d'
+    
+  alias gcp='git checkout -'
+  alias gcd='git checkout develop'
+  alias gcm='git checkout master'
+  
+  alias globalnpm='npm list -g --depth=0'
+  
+  # DOCKER
+  alias startdev='cd ~/git/core-local-env && docker-compose up -d'
+  alias stopdev='cd ~/git/core-local-env && docker-compose down'
+
+  alias dcup='docker-compose up -d'
+  alias dcdown='docker-compose down'
+  alias dps='docker ps'
+
+  alias coredir='cd ~/git/core-local-env'
+
+  # Get the current branch name (not so useful in itself, but used in
+  # other aliases)
+  # alias branchname='git rev-parse --abbrev-ref HEAD'
+  # Push the current branch to the remote "origin", and set it to track
+  # the upstream branch
+  # alias publish='git push -u origin $(alias branchname)'
+
+  alias hld='hyperlayout'
+  alias hlu='hyperlayout uaccount'
+  alias hlw='hyperlayout workplace'
+  alias hyperedit='open -a "Sublime Text" ~/.hyperlayout'
+
+  alias st='open -a "Sublime Text"'
+  alias st='subl .'
+  
+  alias bashedit='open -a "Sublime Text" ~/.bash_profile'
+  alias bashreset='source ~/.bash_profile'
+
+  alias aliasedit='open -a "Sublime Text" ~/.alias'
+  alias aliasreset='open -a "Sublime Text" ~/.alias'
+
+  alias gitedit='open -a "Sublime Text" ~/.gitconfig'
+  
+  alias zshedit='open -a "Sublime Text" ~/.zshrc'  
+  alias zedit='open -a "Sublime Text" ~/.zshrc'
+
+  alias zshreset='source ~/.zshrc'
+  alias zreset='source ~/.zshrc'
+  
+  alias bashhistory='open -a "Sublime Text" ~/.bash_history'
+    
+  alias complib='open -a "Google Chrome" ~/git/UAccount/styleguide/component-library/component-library-dist/components.html'
+  alias lib='open -a "Google Chrome" ~/git/UAccount/styleguide/component-library/component-library-dist/components.html'
+
+  alias listall='ls -a -l'
+  alias tree="find . -print | sed -e 's;[^/]*/;|____;g;s;____|; |;g'"
+
+  alias renpm='rm -r node_modules/; npm i'
+  alias listglobalnpm='npm list -g --depth 0'
+
+  # brew commands:
+  # brew doctor
+  # brew search node
+  # brew uninstall node
+  # brew uninstall --force node
+  # brew prune
+  # brew unlink --overwrite node@8 --force
+  # brew link --overwrite node@6
+  # brew link --overwrite --dry-run node@8 (to show files that will be deleted)
+  # brew link --overwrite node@6 --force
+
+  # usage 'nodelink 8'
+  linknode() {
+      brew link --overwrite node@$1 --force
+  }
+  unlinknode() {
+      brew unlink --overwrite node@$1 --force
+  }
+
+  # alias st='git status'
+  # alias ci='git commit'
+  # alias br='git branch'
+  # alias co='git checkout'
+  # alias cod='git checkout'
+  # alias df='git diff'
+  # alias up='git hf push'
+  # alias down='git pull'
+
+  # Sneak changes into your previous commit
+  alias sneak='git commit -a --amend --no-edit'
+  # Undo the last commit, but preserve the staging area
+  # alias undo='git reset --soft HEAD^'
+  # Show number of commits from all authors.
+  alias stats='git shortlog -sn --all --no-merges'
+  # See everything everyone has done recently
+  alias overview='git log --oneline --no-merges'
+  # See everything I have done recently
+  alias recap='git log --oneline --no-merges --author=csswizardry@gmail.com'
+  # See today’s work
+  alias today='git log --since=\"00:00:00\" --all --no-merges --oneline --author=csswizardry@gmail.com'
+
+  alias ll='ls -la'
+  alias subl="open -a /Applications/Sublime\ Text.app"
+ 

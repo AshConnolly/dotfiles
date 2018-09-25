@@ -1,0 +1,38 @@
+[user]
+	name = Ash Connolly
+	email = ashconnolly1@gmail.com
+[help]
+	autocorrect = 1
+[alias]
+	cm = !sh -c 'git commit -m \"$(git rev-parse --abbrev-ref HEAD | cut -d '/' -f2 | cut -d '_' -f 1 | grep -i "^[a-z]*-[0-9]*" -o) $@\"' -
+	l = log --pretty=oneline -n 20 --graph --abbrev-commit
+	s = status -s
+	a = add -A
+	y = "!f() { for branch in $(git branch); do git log --after='$(date -d \"2 days ago\" \"+%Y-%m-%d 00:01\")' --author=\"$(git config user.name)\" --pretty=\"%s\" --abbrev-commit --no-merges $branch; done; }; f | sort -u"
+	c = "!f() { git commit -S -m \"$*\"; }; f"
+
+[credential]
+	helper = osxkeychain
+
+[push]
+	default = simple
+
+[color]
+    branch = auto
+    diff = auto
+    status = auto
+[color "branch"]
+    current = yellow reverse
+    local = yellow
+    remote = green
+[color "diff"]
+    # meta = yellow bold
+    frag = magenta bold
+    old = red bold
+    new = green bold
+[color "status"]
+    added = green bold
+    changed = red bold
+    removed = red bold
+    untracked = green bold
+
