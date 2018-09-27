@@ -1,3 +1,11 @@
+# Sublime notes
+# cmd+g = next instance of selected
+# shift+cmd+g = prev instance of selected 
+# ctrl+cmd+g = all instances of selected
+# cmd+d = next instance and select
+  # cmd+u = undo next instance and select
+  # cmd+k, cmd + d = skip selected instance and go to next
+
 #FUNK
 function gacp() {
     git add .
