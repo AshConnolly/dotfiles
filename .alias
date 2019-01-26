@@ -1,16 +1,13 @@
-# Sublime notes
-# cmd+g = next instance of selected
-# shift+cmd+g = prev instance of selected 
-# ctrl+cmd+g = all instances of selected
-# cmd+d = next instance and select
-  # cmd+u = undo next instance and select
-  # cmd+k, cmd + d = skip selected instance and go to next
-
 #FUNK
 function gacp() {
     git add .
     git commit -a -m "$1"
     git push
+}
+
+function gac() {
+    git add .
+    git commit -a -m "$1"
 }
 
 function gcb() {
@@ -22,6 +19,16 @@ function gcb() {
 
 function gc() {
     git checkout "$1"
+}
+
+# git delete remote branch
+function gdrb () {
+    git push origin --delete "$1"
+}
+
+# git delete local branch
+function gdlb () {
+    git branch -D "$1"
 }
 
 function branchRemoveLoop() {
@@ -49,29 +56,27 @@ done
 
 # Alias
   alias gs='git status'
-  
+
   alias gpull='git pull'
   alias gpush='git hf push'
   alias gpulld='git pull origin develop'
   alias gpod='git pull origin develop'
   alias gdiff='git diff'
-  alias gd='git diff'
-  
-  
+  # alias gd='git diff'
+  alias gd="git diff -- . ':(exclude)package-lock.json'"
+
+
   alias gst='git stash'
   alias gstp='git stash pop'
-  
-  alias reset='git reset --hard'
-  alias clean='git clean -f -d'
-  alias resetclean='git reset --hard && git clean -f'
+
   alias nuke='git reset --hard && git clean -f -d'
-    
+
   alias gcp='git checkout -'
   alias gcd='git checkout develop'
   alias gcm='git checkout master'
-  
-  alias globalnpm='npm list -g --depth=0'
-  
+  alias gpom='git pull origin master'
+
+
   # DOCKER
   alias startdev='cd ~/git/core-local-env && docker-compose up -d'
   alias stopdev='cd ~/git/core-local-env && docker-compose down'
@@ -92,37 +97,54 @@ done
   alias hld='hyperlayout'
   alias hlu='hyperlayout uaccount'
   alias hlw='hyperlayout workplace'
-  alias hyperedit='open -a "Sublime Text" ~/.hyperlayout'
+  alias hyperedit='open -a "Visual Studio Code" ~/.hyperlayout'
 
   alias st='open -a "Sublime Text"'
   alias st='subl .'
-  
-  alias bashedit='open -a "Sublime Text" ~/.bash_profile'
+
+  alias bashedit='open -a "Visual Studio Code" ~/.bash_profile'
   alias bashreset='source ~/.bash_profile'
 
-  alias aliasedit='open -a "Sublime Text" ~/.alias'
-  alias aliasreset='open -a "Sublime Text" ~/.alias'
+  alias aliasedit='open -a "Visual Studio Code" ~/.alias'
+  alias aliasreset='source -a "Visual Studio Code" ~/.alias'
 
-  alias gitedit='open -a "Sublime Text" ~/.gitconfig'
-  
-  alias zshedit='open -a "Sublime Text" ~/.zshrc'  
-  alias zedit='open -a "Sublime Text" ~/.zshrc'
+  alias gitedit='open -a "Visual Studio Code" ~/.gitconfig'
+
+  alias zshedit='open -a "Visual Studio Code" ~/.zshrc'
+  alias zedit='open -a "Visual Studio Code" ~/.zshrc'
 
   alias zshreset='source ~/.zshrc'
   alias zreset='source ~/.zshrc'
-  
-  alias bashhistory='open -a "Sublime Text" ~/.bash_history'
-    
-  alias complib='open -a "Google Chrome" ~/git/UAccount/styleguide/component-library/component-library-dist/components.html'
-  alias lib='open -a "Google Chrome" ~/git/UAccount/styleguide/component-library/component-library-dist/components.html'
+
+  alias vscedit='code ~/Library/Application\ Support/Code/User/settings.json'
+
+  alias bashhistory='open -a "Visual Studio Code" ~/.bash_history'
+
+  alias sublimeSession='open -a "Sublime Text" ~/Library/Application Support/Sublime Text 3/Local/Session.sublime_session'
 
   alias listall='ls -a -l'
   alias tree="find . -print | sed -e 's;[^/]*/;|____;g;s;____|; |;g'"
 
-  alias renpm='rm -r node_modules/; npm i'
-  alias listglobalnpm='npm list -g --depth 0'
+  alias waketime="sysctl -a |grep waketime"
+  alias sleeptime="sysctl -a |grep sleeptime"
+  alias boottime="sysctl -a |grep kern.boottime"
 
-  # brew commands:
+  alias gitremoteurl="git config --get remote.origin.url"
+
+  alias renpm='rm -r -f node_modules/; npm i'
+  alias rmlock='rm -r package-lock.json'
+  alias npmlistg='npm list -g --depth 0'
+  alias npmlistglobal='npm list -g --depth 0'
+  alias npmlist='npm list --depth 0'
+
+  function npml() {
+    npm list "$1"
+  }
+  function npmvv() {
+    npm view "$1" versions
+  }
+
+    # brew commands:
   # brew doctor
   # brew search node
   # brew uninstall node
@@ -164,5 +186,9 @@ done
   alias today='git log --since=\"00:00:00\" --all --no-merges --oneline --author=csswizardry@gmail.com'
 
   alias ll='ls -la'
-  alias subl="open -a /Applications/Sublime\ Text.app"
- 
+
+  # untracked file
+  # commit current changes or you will lose them
+  # git rm -r --cached .
+  # git add .
+  # git commit -m "fixed untracked files"
