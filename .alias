@@ -1,8 +1,22 @@
 #FUNK
+# function gacp() {
+  # git add .
+  # git commit -a -m "$1"
+  # git push
+#}
+
 function gacp() {
     git add .
-    git commit -a -m "$1"
+    git commit -m "[`git rev-parse --abbrev-ref HEAD | grep --only-matching -E 'LRS-[0-9]+'`] $1"
+    // git commit -a -m "$1"
     git push
+}
+
+# Sneak changes into your previous commit
+function gacpp() {
+    git add .
+    git commit --amend --no-edit
+    git push -f
 }
 
 function gac() {
@@ -19,6 +33,10 @@ function gcb() {
 
 function gc() {
     git checkout "$1"
+}
+
+function nr() {
+    npm run "$1"
 }
 
 # git delete remote branch
@@ -56,18 +74,25 @@ done
 
 # Alias
   alias gs='git status'
-
+  alias gf='git fetch'
   alias gpull='git pull'
-  alias gpush='git hf push'
+  alias gpush='git push'
   alias gpulld='git pull origin develop'
   alias gpod='git pull origin develop'
   alias gdiff='git diff'
   # alias gd='git diff'
-  alias gd="git diff -- . ':(exclude)package-lock.json'"
+  alias gd="git diff -- . ':(exclude)*package-lock.json'"
+  alias gl="git log -n10 --pretty=format:'%Cred%h %Cgreen%ad %Cblue%an %Creset%s' --date='format:%y.%m.%d %H:%M'"
+  alias glf="git log -n10 --pretty=format:'%Cred%h %Cgreen%ad %Cblue%an %Creset%s' --numstat --date='format:%y.%m.%d %H:%M'"
 
+  # Brad alias
+  # alias glm='git log --pretty=format:"%C(yellow)%h%Cred%d %Creset%s%Cblue [%cn]" --decorate origin/master'
+  # alias gdn='git diff --name-only'
+  # alias gs='git status -s -uno'
 
   alias gst='git stash'
   alias gstp='git stash pop'
+  alias gsts="git stash show -p"
 
   alias nuke='git reset --hard && git clean -f -d'
 
@@ -76,14 +101,16 @@ done
   alias gcm='git checkout master'
   alias gpom='git pull origin master'
 
-
   # DOCKER
   alias startdev='cd ~/git/core-local-env && docker-compose up -d'
   alias stopdev='cd ~/git/core-local-env && docker-compose down'
 
-  alias dcup='docker-compose up -d'
-  alias dcdown='docker-compose down'
+  alias dcu='docker-compose up -d'
+  alias dcd='docker-compose down'
   alias dps='docker ps'
+  function dcu() {
+    docker-compose up "$1"
+  }
 
   alias coredir='cd ~/git/core-local-env'
 
@@ -131,7 +158,7 @@ done
 
   alias gitremoteurl="git config --get remote.origin.url"
 
-  alias renpm='rm -r -f node_modules/; npm i'
+  alias renpm='rm -r package-lock.json && rm -r -f node_modules/; npm i'
   alias rmlock='rm -r package-lock.json'
   alias npmlistg='npm list -g --depth 0'
   alias npmlistglobal='npm list -g --depth 0'
@@ -173,21 +200,22 @@ done
   # alias down='git pull'
 
   # Sneak changes into your previous commit
-  alias sneak='git commit -a --amend --no-edit'
+  # alias sneak='git commit -a --amend --no-edit'
   # Undo the last commit, but preserve the staging area
   # alias undo='git reset --soft HEAD^'
   # Show number of commits from all authors.
-  alias stats='git shortlog -sn --all --no-merges'
+  # alias stats='git shortlog -sn --all --no-merges'
   # See everything everyone has done recently
   alias overview='git log --oneline --no-merges'
   # See everything I have done recently
-  alias recap='git log --oneline --no-merges --author=csswizardry@gmail.com'
+  # alias recap='git log --oneline --no-merges --author=csswizardry@gmail.com'
   # See today’s work
-  alias today='git log --since=\"00:00:00\" --all --no-merges --oneline --author=csswizardry@gmail.com'
+  # alias today='git log --since=\"00:00:00\" --all --no-merges --oneline --author=csswizardry@gmail.com'
 
-  alias ll='ls -la'
+  # alias ll='ls -la'
 
-  # untracked file
+  # -------------------------
+  # untracked file removal when updating git ignore
   # commit current changes or you will lose them
   # git rm -r --cached .
   # git add .

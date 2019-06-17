@@ -1,34 +1,24 @@
-# hlu# Various variables you might want for your PS1 prompt instead
-  #Time12h="\T"
-  #Time12a="\@"
-  PathShort="\w"
-  #PathFull="\W"
-  #NewLine="\n"
-  Jobs="\j"
- 
+source ~/sites/dotfiles/.git-completion.bash
+source ~/sites/dotfiles/.git-prompt.sh
+# source ~/sites/dotfiles/.gitconfig
+source ~/sites/dotfiles/.alias
+
 function _update_ps1() {
     PS1="$(~/powerline-shell.py $? 2> /dev/null)"
 }
 
-# Git
-  source ~/.git-completion.bash
-  # source /usr/local/etc/bash_completion.d/git-completion.bash
-  source ~/.git-prompt.sh
-  
-  source ~/.alias
- 
 # MacPorts
   export PATH="/usr/local/bin:/opt/local/bin:/opt/local/sbin:$PATH"
- 
+
 # PostgreSQL
   export PATH="/Applications/Postgres.app/Contents/MacOS/bin:$PATH"
- 
+
 # Ruby Version Manager
   export PATH=$PATH:$HOME/.rvm/bin
- 
+
 # Python path
   export PYTHONPATH=/usr/local/lib/python2.7/site-packages
-  export PATH="$PATH:/usr/local/share/python" 
+  export PATH="$PATH:/usr/local/share/python"
 
 # Colors
   export GREP_OPTIONS='--color=auto' GREP_COLOR='1;32'
@@ -40,20 +30,20 @@ function _update_ps1() {
   if test $UID = 0
       then PS1="\033[1m${PS1}\033[0m"
   fi
- 
+
 # Bash-Completion
   if [ -f $(brew --prefix)/etc/bash_completion ]; then
     . $(brew --prefix)/etc/bash_completion
   fi
- 
- 
+
+
 # Cairo
   export PKG_CONFIG_PATH=/opt/X11/lib/pkgconfig
- 
+
 # Prompt
 # Color Reset
   Color_Off="\[\033[0m\]"       # Text Reset
- 
+
 # Regular Colors
   Black="\[\033[0;30m\]"        # Black
   Red="\[\033[0;31m\]"          # Red
@@ -63,7 +53,7 @@ function _update_ps1() {
   Purple="\[\033[0;35m\]"       # Purple
   Cyan="\[\033[0;36m\]"         # Cyan
   White="\[\033[0;37m\]"        # White
- 
+
 # Bold
   BBlack="\[\033[1;30m\]"       # Black
   BRed="\[\033[1;31m\]"         # Red
@@ -73,7 +63,7 @@ function _update_ps1() {
   BPurple="\[\033[1;35m\]"      # Purple
   BCyan="\[\033[1;36m\]"        # Cyan
   BWhite="\[\033[1;37m\]"       # White
- 
+
 # Underline
   UBlack="\[\033[4;30m\]"       # Black
   URed="\[\033[4;31m\]"         # Red
@@ -83,7 +73,7 @@ function _update_ps1() {
   UPurple="\[\033[4;35m\]"      # Purple
   UCyan="\[\033[4;36m\]"        # Cyan
   UWhite="\[\033[4;37m\]"       # White
- 
+
 # Background
   On_Black="\[\033[40m\]"       # Black
   On_Red="\[\033[41m\]"         # Red
@@ -93,7 +83,7 @@ function _update_ps1() {
   On_Purple="\[\033[45m\]"      # Purple
   On_Cyan="\[\033[46m\]"        # Cyan
   On_White="\[\033[47m\]"       # White
- 
+
 # High Intensty
   IBlack="\[\033[0;90m\]"       # Black
   IRed="\[\033[0;91m\]"         # Red
@@ -103,7 +93,7 @@ function _update_ps1() {
   IPurple="\[\033[0;95m\]"      # Purple
   ICyan="\[\033[0;96m\]"        # Cyan
   IWhite="\[\033[0;97m\]"       # White
- 
+
 # Bold High Intensty
   BIBlack="\[\033[1;90m\]"      # Black
   BIRed="\[\033[1;91m\]"        # Red
@@ -113,7 +103,7 @@ function _update_ps1() {
   BIPurple="\[\033[1;95m\]"     # Purple
   BICyan="\[\033[1;96m\]"       # Cyan
   BIWhite="\[\033[1;97m\]"      # White
- 
+
 # High Intensty backgrounds
   On_IBlack="\[\033[0;100m\]"   # Black
   On_IRed="\[\033[0;101m\]"     # Red
@@ -123,7 +113,7 @@ function _update_ps1() {
   On_IPurple="\[\033[10;95m\]"  # Purple
   On_ICyan="\[\033[0;106m\]"    # Cyan
   On_IWhite="\[\033[0;107m\]"   # White
- 
+
 # Various variables you might want for your PS1 prompt instead
   Time12h="\T"
   Time12a="\@"
@@ -131,7 +121,7 @@ function _update_ps1() {
   #PathFull="\W"
   #NewLine="\n"
   #Jobs="\j"
- 
+
   # if [ $SHELL = "/bin/bash" ]; then
     trim() {
       local var=$1
@@ -177,10 +167,5 @@ function _update_ps1() {
       echo "'$BYellow$PathShort$Color_Off' '$IBlue''$Color_Off'$"; \
     fi)'
   # fi
- 
 
-
-
-
-
-
+export PATH=$PATH:~/bin
