@@ -42,7 +42,7 @@ function gdlb () {
     git branch -D "$1"
 }
 
-# Common alias
+# Git commands
 alias gs='git status'
 alias gf='git fetch'
 alias gpull='git pull'
@@ -52,17 +52,15 @@ alias gpod='git pull origin develop'
 alias gd="git diff -- . ':(exclude)*package-lock.json'"
 alias gl="git log -n10 --pretty=format:'%Cred%h %Cgreen%ad %Cblue%an %Creset%s' --date='format:%y.%m.%d %H:%M'"
 alias glf="git log -n10 --pretty=format:'%Cred%h %Cgreen%ad %Cblue%an %Creset%s' --numstat --date='format:%y.%m.%d %H:%M'"
-
 alias gst='git stash'
 alias gstp='git stash pop'
 alias gsts="git stash show -p"
-
 alias nuke='git reset --hard && git clean -f -d'
-
 alias gcp='git checkout -'
 alias gcd='git checkout develop'
 alias gcm='git checkout master'
 alias gpom='git pull origin master'
+alias gitremoteurl="git config --get remote.origin.url"
 
 # DOCKER
 alias startdev='cd ~/git/core-local-env && docker-compose up -d'
@@ -86,15 +84,14 @@ alias bashhistory='open -a "Visual Studio Code" ~/.bash_history'
 alias listall='ls -a -l'
 alias tree="find . -print | sed -e 's;[^/]*/;|____;g;s;____|; |;g'"
 
+# Time data
 alias waketime="sysctl -a |grep waketime"
 alias sleeptime="sysctl -a |grep sleeptime"
 alias boottime="sysctl -a |grep kern.boottime"
-alias gitremoteurl="git config --get remote.origin.url"
-
-alias renpm='rm -r package-lock.json && rm -r -f node_modules/; npm i'
-alias rmlock='rm -r package-lock.json'
 
 # NPM shortcuts
+alias renpm='rm -r package-lock.json && rm -r -f node_modules/; npm i'
+alias rmlock='rm -r package-lock.json'
 alias npmlistg='npm list -g --depth 0'
 alias npmlistglobal='npm list -g --depth 0'
 alias npmlist='npm list --depth 0'
@@ -111,6 +108,14 @@ function npmvv() {
   npm view "$1" versions
 }
 
+# usage 'nodelink 8'
+linknode() {
+    brew link --overwrite node@$1 --force
+}
+unlinknode() {
+    brew unlink --overwrite node@$1 --force
+}
+
 # brew commands:
 # brew doctor
 # brew search node
@@ -121,23 +126,6 @@ function npmvv() {
 # brew link --overwrite node@6
 # brew link --overwrite --dry-run node@8 (to show files that will be deleted)
 # brew link --overwrite node@6 --force
-
-# usage 'nodelink 8'
-linknode() {
-    brew link --overwrite node@$1 --force
-}
-unlinknode() {
-    brew unlink --overwrite node@$1 --force
-}
-
-# alias st='git status'
-# alias ci='git commit'
-# alias br='git branch'
-# alias co='git checkout'
-# alias cod='git checkout'
-# alias df='git diff'
-# alias up='git hf push'
-# alias down='git pull'
 
 # Sneak changes into your previous commit
 # alias sneak='git commit -a --amend --no-edit'
