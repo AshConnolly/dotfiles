@@ -1,8 +1,10 @@
-# [user]
-# 	name = Ash Connolly
-# 	email = ashconnolly1@gmail.com
+[user]
+ 	name = Ash Connolly
+ 	email = ashconnollydigital@gmail.com
+
 [help]
 	autocorrect = 1
+
 [alias]
 	cm = !sh -c 'git commit -m \"$(git rev-parse --abbrev-ref HEAD | cut -d '/' -f2 | cut -d '_' -f 1 | grep -i "^[a-z]*-[0-9]*" -o) $@\"' -
 	l = log --pretty=oneline -n 20 --graph --abbrev-commit
@@ -21,15 +23,18 @@
     branch = auto
     diff = auto
     status = auto
+
 [color "branch"]
     current = yellow reverse
     local = yellow
     remote = green
+
 [color "diff"]
     # meta = yellow bold
     frag = magenta bold
     old = red bold
     new = green bold
+
 [color "status"]
     added = green bold
     changed = red bold

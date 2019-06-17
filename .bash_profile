@@ -1,6 +1,5 @@
 source ~/sites/dotfiles/.git-completion.bash
 source ~/sites/dotfiles/.git-prompt.sh
-# source ~/sites/dotfiles/.gitconfig
 source ~/sites/dotfiles/.alias
 
 function _update_ps1() {
