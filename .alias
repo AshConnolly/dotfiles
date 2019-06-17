@@ -1,14 +1,8 @@
-#FUNK
-# function gacp() {
-  # git add .
-  # git commit -a -m "$1"
-  # git push
-#}
-
+# Git add, commit, push
 function gacp() {
     git add .
-    git commit -m "[`git rev-parse --abbrev-ref HEAD | grep --only-matching -E 'LRS-[0-9]+'`] $1"
-    // git commit -a -m "$1"
+    // git commit -m "[`git rev-parse --abbrev-ref HEAD | grep --only-matching -E 'LRS-[0-9]+'`] $1"
+    git commit -a -m "$1"
     git push
 }
 
@@ -19,11 +13,13 @@ function gacpp() {
     git push -f
 }
 
+# Git add, commit
 function gac() {
     git add .
     git commit -a -m "$1"
 }
 
+# Git add, commit, push
 function gcb() {
     git fetch
     git pull
@@ -31,12 +27,9 @@ function gcb() {
     git push -u origin "$1"
 }
 
+# Git checkout
 function gc() {
     git checkout "$1"
-}
-
-function nr() {
-    npm run "$1"
 }
 
 # git delete remote branch
@@ -49,174 +42,150 @@ function gdlb () {
     git branch -D "$1"
 }
 
-function branchRemoveLoop() {
-declare -a arr=(
-  "IAMQ1-212_standing-order-ajax-start-date"
-  "feature/DI-462_ajax-recent-transactions"
-  "feature/PUB-398_ImprovementsToPaymentProcess"
-  "subtask/IAMQ1-60-new-payments-design"
-  "subtask/IAMQ1-60-refactor-front-end"
-  "subtask/IAMQ1-68-payment_backend_changes"
-  "subtask/JR-26_SassSetUp"
-  )
+# Common alias
+alias gs='git status'
+alias gf='git fetch'
+alias gpull='git pull'
+alias gpush='git push'
+alias gpulld='git pull origin develop'
+alias gpod='git pull origin develop'
+alias gd="git diff -- . ':(exclude)*package-lock.json'"
+alias gl="git log -n10 --pretty=format:'%Cred%h %Cgreen%ad %Cblue%an %Creset%s' --date='format:%y.%m.%d %H:%M'"
+alias glf="git log -n10 --pretty=format:'%Cred%h %Cgreen%ad %Cblue%an %Creset%s' --numstat --date='format:%y.%m.%d %H:%M'"
 
-## now loop through the above array
+alias gst='git stash'
+alias gstp='git stash pop'
+alias gsts="git stash show -p"
 
-for i in "${arr[@]}"
-do
-   git branch -d "$i"
-   # or do whatever with individual element of the array
-done
+alias nuke='git reset --hard && git clean -f -d'
+
+alias gcp='git checkout -'
+alias gcd='git checkout develop'
+alias gcm='git checkout master'
+alias gpom='git pull origin master'
+
+# DOCKER
+alias startdev='cd ~/git/core-local-env && docker-compose up -d'
+alias stopdev='cd ~/git/core-local-env && docker-compose down'
+alias dcu='docker-compose up -d'
+alias dcd='docker-compose down'
+alias dps='docker ps'
+function dcu() {
+  docker-compose up "$1"
+}
+alias coredir='cd ~/git/core-local-env'
+
+# File shortcuts
+alias bashedit='open -a "Visual Studio Code" ~/sites/dotfiles/.bash_profile'
+alias bashreset='source ~/sites/dotfiles/.bash_profile'
+alias aliasedit='open -a "Visual Studio Code" ~/sites/dotfiles/.alias'
+alias aliasreset='source -a "Visual Studio Code" ~/sites/dotfiles/.alias'
+alias gitedit='open -a "Visual Studio Code" ~/sites/dotfiles/.gitconfig'
+alias vscedit='code ~/Library/Application\ Support/Code/User/settings.json'
+alias bashhistory='open -a "Visual Studio Code" ~/.bash_history'
+alias listall='ls -a -l'
+alias tree="find . -print | sed -e 's;[^/]*/;|____;g;s;____|; |;g'"
+
+alias waketime="sysctl -a |grep waketime"
+alias sleeptime="sysctl -a |grep sleeptime"
+alias boottime="sysctl -a |grep kern.boottime"
+alias gitremoteurl="git config --get remote.origin.url"
+
+alias renpm='rm -r package-lock.json && rm -r -f node_modules/; npm i'
+alias rmlock='rm -r package-lock.json'
+
+# NPM shortcuts
+alias npmlistg='npm list -g --depth 0'
+alias npmlistglobal='npm list -g --depth 0'
+alias npmlist='npm list --depth 0'
+# npm run
+function nr() {
+  npm run "$1"
+}
+# npm list
+function npml() {
+  npm list "$1"
+}
+# npm list view versions
+function npmvv() {
+  npm view "$1" versions
 }
 
-# git checkout -b feature/border-radius-chrome-user-agent-stylesheet-fix
-# git push -u origin feature/border-radius-chrome-user-agent-stylesheet-fix
+# brew commands:
+# brew doctor
+# brew search node
+# brew uninstall node
+# brew uninstall --force node
+# brew prune
+# brew unlink --overwrite node@8 --force
+# brew link --overwrite node@6
+# brew link --overwrite --dry-run node@8 (to show files that will be deleted)
+# brew link --overwrite node@6 --force
 
-# Alias
-  alias gs='git status'
-  alias gf='git fetch'
-  alias gpull='git pull'
-  alias gpush='git push'
-  alias gpulld='git pull origin develop'
-  alias gpod='git pull origin develop'
-  alias gdiff='git diff'
-  # alias gd='git diff'
-  alias gd="git diff -- . ':(exclude)*package-lock.json'"
-  alias gl="git log -n10 --pretty=format:'%Cred%h %Cgreen%ad %Cblue%an %Creset%s' --date='format:%y.%m.%d %H:%M'"
-  alias glf="git log -n10 --pretty=format:'%Cred%h %Cgreen%ad %Cblue%an %Creset%s' --numstat --date='format:%y.%m.%d %H:%M'"
+# usage 'nodelink 8'
+linknode() {
+    brew link --overwrite node@$1 --force
+}
+unlinknode() {
+    brew unlink --overwrite node@$1 --force
+}
 
-  # Brad alias
-  # alias glm='git log --pretty=format:"%C(yellow)%h%Cred%d %Creset%s%Cblue [%cn]" --decorate origin/master'
-  # alias gdn='git diff --name-only'
-  # alias gs='git status -s -uno'
+# alias st='git status'
+# alias ci='git commit'
+# alias br='git branch'
+# alias co='git checkout'
+# alias cod='git checkout'
+# alias df='git diff'
+# alias up='git hf push'
+# alias down='git pull'
 
-  alias gst='git stash'
-  alias gstp='git stash pop'
-  alias gsts="git stash show -p"
+# Sneak changes into your previous commit
+# alias sneak='git commit -a --amend --no-edit'
+# Undo the last commit, but preserve the staging area
+# alias undo='git reset --soft HEAD^'
+# Show number of commits from all authors.
+alias stats='git shortlog -sn --all --no-merges'
+# See everything everyone has done recently
+alias overview='git log --oneline --no-merges'
+# See everything I have done recently
+# alias recap='git log --oneline --no-merges --author=cashley.connolly@skybettingandgaming.com'
+# See today’s work
+# alias today='git log --since=\"00:00:00\" --all --no-merges --oneline --author=cashley.connolly@skybettingandgaming.com'
 
-  alias nuke='git reset --hard && git clean -f -d'
+# alias ll='ls -la'
 
-  alias gcp='git checkout -'
-  alias gcd='git checkout develop'
-  alias gcm='git checkout master'
-  alias gpom='git pull origin master'
+# Updating git ignore - untracked file removal
+# commit current changes or you will lose them
+# git rm -r --cached .
+# git add .
+# git commit -m "fixed untracked files"
 
-  # DOCKER
-  alias startdev='cd ~/git/core-local-env && docker-compose up -d'
-  alias stopdev='cd ~/git/core-local-env && docker-compose down'
+# Get the current branch name (not so useful in itself, but used in
+# other aliases)
+# alias branchname='git rev-parse --abbrev-ref HEAD'
 
-  alias dcu='docker-compose up -d'
-  alias dcd='docker-compose down'
-  alias dps='docker ps'
-  function dcu() {
-    docker-compose up "$1"
-  }
+# Push the current branch to the remote "origin", and set it to track
+# the upstream branch
+# alias publish='git push -u origin $(alias branchname)'
 
-  alias coredir='cd ~/git/core-local-env'
 
-  # Get the current branch name (not so useful in itself, but used in
-  # other aliases)
-  # alias branchname='git rev-parse --abbrev-ref HEAD'
-  # Push the current branch to the remote "origin", and set it to track
-  # the upstream branch
-  # alias publish='git push -u origin $(alias branchname)'
+# For loop fro removing local branches
+# function branchRemoveLoop() {
+# declare -a arr=(
+#   "IAMQ1-212_standing-order-ajax-start-date"
+#   "feature/DI-462_ajax-recent-transactions"
+#   "feature/PUB-398_ImprovementsToPaymentProcess"
+#   "subtask/IAMQ1-60-new-payments-design"
+#   "subtask/IAMQ1-60-refactor-front-end"
+#   "subtask/IAMQ1-68-payment_backend_changes"
+#   "subtask/JR-26_SassSetUp"
+#   )
 
-  alias hld='hyperlayout'
-  alias hlu='hyperlayout uaccount'
-  alias hlw='hyperlayout workplace'
-  alias hyperedit='open -a "Visual Studio Code" ~/.hyperlayout'
+# ## now loop through the above array
 
-  alias st='open -a "Sublime Text"'
-  alias st='subl .'
-
-  alias bashedit='open -a "Visual Studio Code" ~/.bash_profile'
-  alias bashreset='source ~/.bash_profile'
-
-  alias aliasedit='open -a "Visual Studio Code" ~/.alias'
-  alias aliasreset='source -a "Visual Studio Code" ~/.alias'
-
-  alias gitedit='open -a "Visual Studio Code" ~/.gitconfig'
-
-  alias zshedit='open -a "Visual Studio Code" ~/.zshrc'
-  alias zedit='open -a "Visual Studio Code" ~/.zshrc'
-
-  alias zshreset='source ~/.zshrc'
-  alias zreset='source ~/.zshrc'
-
-  alias vscedit='code ~/Library/Application\ Support/Code/User/settings.json'
-
-  alias bashhistory='open -a "Visual Studio Code" ~/.bash_history'
-
-  alias sublimeSession='open -a "Sublime Text" ~/Library/Application Support/Sublime Text 3/Local/Session.sublime_session'
-
-  alias listall='ls -a -l'
-  alias tree="find . -print | sed -e 's;[^/]*/;|____;g;s;____|; |;g'"
-
-  alias waketime="sysctl -a |grep waketime"
-  alias sleeptime="sysctl -a |grep sleeptime"
-  alias boottime="sysctl -a |grep kern.boottime"
-
-  alias gitremoteurl="git config --get remote.origin.url"
-
-  alias renpm='rm -r package-lock.json && rm -r -f node_modules/; npm i'
-  alias rmlock='rm -r package-lock.json'
-  alias npmlistg='npm list -g --depth 0'
-  alias npmlistglobal='npm list -g --depth 0'
-  alias npmlist='npm list --depth 0'
-
-  function npml() {
-    npm list "$1"
-  }
-  function npmvv() {
-    npm view "$1" versions
-  }
-
-    # brew commands:
-  # brew doctor
-  # brew search node
-  # brew uninstall node
-  # brew uninstall --force node
-  # brew prune
-  # brew unlink --overwrite node@8 --force
-  # brew link --overwrite node@6
-  # brew link --overwrite --dry-run node@8 (to show files that will be deleted)
-  # brew link --overwrite node@6 --force
-
-  # usage 'nodelink 8'
-  linknode() {
-      brew link --overwrite node@$1 --force
-  }
-  unlinknode() {
-      brew unlink --overwrite node@$1 --force
-  }
-
-  # alias st='git status'
-  # alias ci='git commit'
-  # alias br='git branch'
-  # alias co='git checkout'
-  # alias cod='git checkout'
-  # alias df='git diff'
-  # alias up='git hf push'
-  # alias down='git pull'
-
-  # Sneak changes into your previous commit
-  # alias sneak='git commit -a --amend --no-edit'
-  # Undo the last commit, but preserve the staging area
-  # alias undo='git reset --soft HEAD^'
-  # Show number of commits from all authors.
-  # alias stats='git shortlog -sn --all --no-merges'
-  # See everything everyone has done recently
-  alias overview='git log --oneline --no-merges'
-  # See everything I have done recently
-  # alias recap='git log --oneline --no-merges --author=csswizardry@gmail.com'
-  # See today’s work
-  # alias today='git log --since=\"00:00:00\" --all --no-merges --oneline --author=csswizardry@gmail.com'
-
-  # alias ll='ls -la'
-
-  # -------------------------
-  # untracked file removal when updating git ignore
-  # commit current changes or you will lose them
-  # git rm -r --cached .
-  # git add .
-  # git commit -m "fixed untracked files"
+# for i in "${arr[@]}"
+# do
+#    git branch -d "$i"
+#    # or do whatever with individual element of the array
+# done
+# }
