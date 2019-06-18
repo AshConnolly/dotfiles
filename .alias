@@ -74,13 +74,17 @@ function dcu() {
 alias coredir='cd ~/git/core-local-env'
 
 # File shortcuts
+alias bashreset='source ~/.bash_profile'
 alias bashedit='open -a "Visual Studio Code" ~/sites/dotfiles/.bash_profile'
-alias bashreset='source ~/sites/dotfiles/.bash_profile'
+alias basheditroot='open -a "Visual Studio Code" ~/.bash_profile'
+# alias bashreset='source ~/sites/dotfiles/.bash_profile'
 alias aliasedit='open -a "Visual Studio Code" ~/sites/dotfiles/.alias'
 alias aliasreset='source -a "Visual Studio Code" ~/sites/dotfiles/.alias'
 alias gitedit='open -a "Visual Studio Code" ~/sites/dotfiles/.gitconfig'
 alias vscedit='code ~/Library/Application\ Support/Code/User/settings.json'
 alias bashhistory='open -a "Visual Studio Code" ~/.bash_history'
+
+# Utilities
 alias listall='ls -a -l'
 alias tree="find . -print | sed -e 's;[^/]*/;|____;g;s;____|; |;g'"
 
@@ -95,15 +99,12 @@ alias rmlock='rm -r package-lock.json'
 alias npmlistg='npm list -g --depth 0'
 alias npmlistglobal='npm list -g --depth 0'
 alias npmlist='npm list --depth 0'
-# npm run
 function nr() {
   npm run "$1"
 }
-# npm list
 function npml() {
   npm list "$1"
 }
-# npm list view versions
 function npmvv() {
   npm view "$1" versions
 }
