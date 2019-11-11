@@ -95,6 +95,7 @@ alias sleeptime="sysctl -a |grep sleeptime"
 alias boottime="sysctl -a |grep kern.boottime"
 
 # NPM shortcuts
+alias reyarn='rm -r yarn.lock && rm -r -f node_modules/; yarn install'
 alias renpm='rm -r package-lock.json && rm -r -f node_modules/; npm i'
 alias rmlock='rm -r package-lock.json'
 alias npmlistg='npm list -g --depth 0'
@@ -164,23 +165,17 @@ alias overview='git log --oneline --no-merges'
 # alias publish='git push -u origin $(alias branchname)'
 
 
-# For loop fro removing local branches
-# function branchRemoveLoop() {
-# declare -a arr=(
-#   "IAMQ1-212_standing-order-ajax-start-date"
-#   "feature/DI-462_ajax-recent-transactions"
-#   "feature/PUB-398_ImprovementsToPaymentProcess"
-#   "subtask/IAMQ1-60-new-payments-design"
-#   "subtask/IAMQ1-60-refactor-front-end"
-#   "subtask/IAMQ1-68-payment_backend_changes"
-#   "subtask/JR-26_SassSetUp"
-#   )
-
-# ## now loop through the above array
-
-# for i in "${arr[@]}"
-# do
-#    git branch -d "$i"
-#    # or do whatever with individual element of the array
-# done
-# }
+# For loop for removing local branches, or opening in code etc
+function openincode() {
+  declare -a arr=(
+    "api"
+    "auth-provider"
+  )
+  #now loop through the above array
+  for i in "${arr[@]}"
+  do
+    code "$i"
+    # git branch -d "$i"
+    # or do whatever with individual element of the array
+done
+}
