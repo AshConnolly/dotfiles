@@ -1,7 +1,7 @@
 # Git add, commit, push
 function gacp() {
     git add .
-    # git commit -m "[`git rev-parse --abbrev-ref HEAD | grep --only-matching -E 'LRS-[0-9]+'`] $1"
+    # git commit -m "[`git rev-parse --abbrev-ref HEAD | grep --only-matching -E 'CAI-[0-9]+'`] $1"
     git commit -a -m "$1"
     git push
 }
@@ -19,7 +19,7 @@ function gac() {
     git commit -a -m "$1"
 }
 
-# Git add, commit, push
+# Git create branch
 function gcb() {
     git fetch
     git pull
@@ -47,17 +47,16 @@ alias gs='git status'
 alias gf='git fetch'
 alias gpull='git pull'
 alias gpush='git push'
-alias gpulld='git pull origin develop'
-alias gpod='git pull origin develop'
-alias gd="git diff -- . ':(exclude)*package-lock.json'"
+alias gd="git diff -- . ':(exclude)*package-lock.json' ':(exclude)*yarn.lock'"
 alias gl="git log -n10 --pretty=format:'%Cred%h %Cgreen%ad %Cblue%an %Creset%s' --date='format:%y.%m.%d %H:%M'"
 alias glf="git log -n10 --pretty=format:'%Cred%h %Cgreen%ad %Cblue%an %Creset%s' --numstat --date='format:%y.%m.%d %H:%M'"
 alias gst='git stash'
 alias gstp='git stash pop'
 alias gsts="git stash show -p"
-alias nuke='git reset --hard && git clean -f -d'
+alias nuke='git reset --hard HEAD~1 && git clean -f -d'
 alias gcp='git checkout -'
 alias gcd='git checkout develop'
+alias gpod='git pull origin develop'
 alias gcm='git checkout master'
 alias gpom='git pull origin master'
 alias gitremoteurl="git config --get remote.origin.url"
@@ -95,15 +94,19 @@ alias sleeptime="sysctl -a |grep sleeptime"
 alias boottime="sysctl -a |grep kern.boottime"
 
 # NPM shortcuts
+alias nrs='npm run start'
+alias nrt='npm run test'
 alias reyarn='rm -r yarn.lock && rm -r -f node_modules/; yarn install'
 alias renpm='rm -r package-lock.json && rm -r -f node_modules/; npm i'
 alias rmlock='rm -r package-lock.json'
 alias npmlistg='npm list -g --depth 0'
 alias npmlistglobal='npm list -g --depth 0'
 alias npmlist='npm list --depth 0'
+
 function nr() {
   npm run "$1"
 }
+
 function npml() {
   npm list "$1"
 }
@@ -163,19 +166,3 @@ alias overview='git log --oneline --no-merges'
 # Push the current branch to the remote "origin", and set it to track
 # the upstream branch
 # alias publish='git push -u origin $(alias branchname)'
-
-
-# For loop for removing local branches, or opening in code etc
-function openincode() {
-  declare -a arr=(
-    "api"
-    "auth-provider"
-  )
-  #now loop through the above array
-  for i in "${arr[@]}"
-  do
-    code "$i"
-    # git branch -d "$i"
-    # or do whatever with individual element of the array
-done
-}
