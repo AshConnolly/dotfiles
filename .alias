@@ -6,6 +6,13 @@ function gacp() {
     git push
 }
 
+# Git commit, push
+function gcp() {
+    # git commit -m "[`git rev-parse --abbrev-ref HEAD | grep --only-matching -E 'CAI-[0-9]+'`] $1"
+    git commit -a -m "$1"
+    git push
+}
+
 # Sneak changes into your previous commit
 function gacpp() {
     git add .
@@ -42,6 +49,10 @@ function gdlb () {
     git branch -D "$1"
 }
 
+function int() {
+  open -a "IntelliJ IDEA.app" "$1"
+}
+
 # Git commands
 alias gs='git status'
 alias gf='git fetch'
@@ -61,8 +72,11 @@ alias gcm='git checkout master'
 alias gpom='git pull origin master'
 alias gitremoteurl="git config --get remote.origin.url"
 
+alias hg='history|grep '
+
 # DOCKER
-alias startdev='cd ~/git/core-local-env && docker-compose up -d'
+# alias startdev='cd ~/git/core-local-env && docker-compose up -d'
+alias startdev='cd ~/git/core-local-env && docker-compose up -d account auth_provider consumer_skybet core_web customer_data test_consumer'
 alias stopdev='cd ~/git/core-local-env && docker-compose down'
 alias dcu='docker-compose up -d'
 alias dcd='docker-compose down'

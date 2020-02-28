@@ -2,6 +2,9 @@ source ~/sites/dotfiles/.git-completion.bash
 source ~/sites/dotfiles/.git-prompt.sh
 source ~/sites/dotfiles/.alias
 
+export HISTFILESIZE=50000
+export HISTSIZE=50000
+
 function _update_ps1() {
     PS1="$(~/powerline-shell.py $? 2> /dev/null)"
 }
