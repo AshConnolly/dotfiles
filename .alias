@@ -180,3 +180,43 @@ alias overview='git log --oneline --no-merges'
 # Push the current branch to the remote "origin", and set it to track
 # the upstream branch
 # alias publish='git push -u origin $(alias branchname)'
+
+# For loop to open all subdirectories in vscode
+function openfoldersincode() {
+  declare -a dirs
+  i=1
+  for d in */
+  do
+      dirs[i++]="${d%/}"
+  done
+  echo "There are ${#dirs[@]} dirs in the current path."
+  for((i=1;i<=${#dirs[@]};i++))
+  do
+      echo $i "${dirs[i]}"
+      code "${dirs[i]}"
+  done
+  # https://stackoverflow.com/a/4494667/2627434 - select works too for interactive selection
+  # echo "which dir do you want?"
+  # echo -n "> "
+  # read i
+  # echo "you selected ${dirs[$i]}"
+  # cd "${dirs[$i]}"
+}
+
+# For loop for opening an array of folders in vscode
+function openincode() {
+  # create array
+  declare -a arr1=(
+    "sites/test"
+    "sites/test2"
+  )
+
+  #now loop through the above array
+  cd ~
+  for i in "${arr1[@]}"
+  do
+    code "$i"
+    # git branch -d "$i"
+    # or do whatever with individual element of the array
+  done
+}
