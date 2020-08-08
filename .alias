@@ -1,3 +1,16 @@
+# Git commit, push
+function gcp() {
+    # git commit -m "[`git rev-parse --abbrev-ref HEAD | grep --only-matching -E 'CAI-[0-9]+'`] $1"
+    git commit -a -m "$1"
+    git push
+}
+
+# Git add, commit
+function gac() {
+    git add .
+    git commit -a -m "$1"
+}
+
 # Git add, commit, push
 function gacp() {
     git add .
@@ -6,18 +19,10 @@ function gacp() {
     git push
 }
 
-# Git commit, push
-function gcp() {
-    # git commit -m "[`git rev-parse --abbrev-ref HEAD | grep --only-matching -E 'CAI-[0-9]+'`] $1"
-    git commit -a -m "$1"
-    git push
-}
-
 # Sneak changes into your previous commit and force push remote
 function gacpp() {
     git add .
-    git commit --amend --no-edit
-    # git push -f
+    git commit --amend --no-edit # git push -f
     git push origin "$1" --force-with-lease # --force-with-lease ensures you do not overwrite the commits of others that have been pushed to the remote branch since your last commit!
 }
 
@@ -30,12 +35,6 @@ function gaca() {
 # git push --force-with-lease
 function gpf() {
   git push origin "$1" --force-with-lease # --force-with-lease ensures you do not overwrite the commits of others that have been pushed to the remote branch since your last commit!
-}
-
-# Git add, commit
-function gac() {
-    git add .
-    git commit -a -m "$1"
 }
 
 # Git create branch
@@ -92,7 +91,6 @@ alias gpod='git pull origin develop'
 alias gcm='git checkout master'
 alias gpom='git pull origin master'
 alias gitremoteurl="git config --get remote.origin.url"
-
 alias hg='history|grep '
 
 # DOCKER
