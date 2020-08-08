@@ -13,11 +13,23 @@ function gcp() {
     git push
 }
 
-# Sneak changes into your previous commit
+# Sneak changes into your previous commit and force push remote
 function gacpp() {
     git add .
     git commit --amend --no-edit
-    git push -f
+    # git push -f
+    git push origin "$1" --force-with-lease # --force-with-lease ensures you do not overwrite the commits of others that have been pushed to the remote branch since your last commit!
+}
+
+# Sneak changes into previous commit - git add commit amend
+function gaca() {
+  git add .
+  git commit --amend --no-edit
+}
+
+# git push --force-with-lease
+function gpf() {
+  git push origin "$1" --force-with-lease # --force-with-lease ensures you do not overwrite the commits of others that have been pushed to the remote branch since your last commit!
 }
 
 # Git add, commit
@@ -37,6 +49,14 @@ function gcb() {
 # Git checkout
 function gc() {
     git checkout "$1"
+}
+
+# git delete local & remote branch
+function gdb () {
+    git branch -D "$1"
+    echo "Deleted ${$1} locally"
+    git push origin --delete "$1"
+    echo "Deleted ${$1} remotely"
 }
 
 # git delete remote branch
@@ -64,7 +84,8 @@ alias glf="git log -n10 --pretty=format:'%Cred%h %Cgreen%ad %Cblue%an %Creset%s'
 alias gst='git stash'
 alias gstp='git stash pop'
 alias gsts="git stash show -p"
-alias nuke='git reset --hard HEAD~1 && git clean -f -d'
+alias nuke='git reset --hard && git clean -f -d'
+alias meganuke='git reset --hard HEAD~1 && git clean -f -d'
 alias gcp='git checkout -'
 alias gcd='git checkout develop'
 alias gpod='git pull origin develop'
@@ -76,10 +97,12 @@ alias hg='history|grep '
 
 # DOCKER
 # alias startdev='cd ~/git/core-local-env && docker-compose up -d'
-alias startdev='cd ~/git/core-local-env && docker-compose up -d account auth_provider consumer_skybet core_web customer_data test_consumer'
+alias startdev='cd ~/git/core-local-env && docker-compose up -d consumer_skybet core_web'
+alias startdevall='cd ~/git/core-local-env && docker-compose up -d account auth_provider consumer_skybet core_web customer_data test_consumer'
 alias stopdev='cd ~/git/core-local-env && docker-compose down'
 alias dcu='docker-compose up -d'
 alias dcd='docker-compose down'
+alias dcps='docker-compose ps'
 alias dps='docker ps'
 function dcu() {
   docker-compose up "$1"
@@ -110,7 +133,11 @@ alias boottime="sysctl -a |grep kern.boottime"
 # NPM shortcuts
 alias nrs='npm run start'
 alias nrt='npm run test'
-alias reyarn='rm -r yarn.lock && rm -r -f node_modules/; yarn install'
+alias nrd='npm run dev'
+alias nrb='npm run build'
+alias nrbs='npm run build && npm run start'
+alias nre='npm run export'
+alias reyarn='rm -r -f node_modules/; yarn'
 alias renpm='rm -r package-lock.json && rm -r -f node_modules/; npm i'
 alias rmlock='rm -r package-lock.json'
 alias npmlistg='npm list -g --depth 0'
