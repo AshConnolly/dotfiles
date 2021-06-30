@@ -1,7 +1,7 @@
 # Git commit, push
 function gcp() {
-    # git commit -m "[`git rev-parse --abbrev-ref HEAD | grep --only-matching -E 'CAI-[0-9]+'`] $1"
-    git commit -a -m "$1"
+    git commit -m "[`git rev-parse --abbrev-ref HEAD | grep --only-matching -E 'CAI-[0-9]+'`] $1"
+    # git commit -m "$1"
     git push
 }
 
@@ -45,6 +45,13 @@ function gcb() {
     git push -u origin "$1"
 }
 
+# Git create local branch
+function gclb() {
+    git fetch
+    git pull
+    git checkout -b "$1"
+}
+
 # Git checkout
 function gc() {
     git checkout "$1"
@@ -74,6 +81,7 @@ function int() {
 
 # Git commands
 alias gs='git status'
+alias gb='git branch'
 alias gf='git fetch'
 alias gpull='git pull'
 alias gpush='git push'
@@ -85,7 +93,7 @@ alias gstp='git stash pop'
 alias gsts="git stash show -p"
 alias nuke='git reset --hard && git clean -f -d'
 alias meganuke='git reset --hard HEAD~1 && git clean -f -d'
-alias gcp='git checkout -'
+alias gc-='git checkout -'
 alias gcd='git checkout develop'
 alias gpod='git pull origin develop'
 alias gcm='git checkout master'
@@ -97,7 +105,8 @@ alias hg='history|grep '
 # alias startdev='cd ~/git/core-local-env && docker-compose up -d'
 alias startdev='cd ~/git/core-local-env && docker-compose up -d consumer_skybet core_web'
 alias startdevall='cd ~/git/core-local-env && docker-compose up -d account auth_provider consumer_skybet core_web customer_data test_consumer'
-alias stopdev='cd ~/git/core-local-env && docker-compose down'
+alias stopdev='cd ~/git/core-local-env && docker-compose stop'
+alias downdev='cd ~/git/core-local-env && docker-compose down'
 alias dcu='docker-compose up -d'
 alias dcd='docker-compose down'
 alias dcps='docker-compose ps'
@@ -113,7 +122,7 @@ alias bashedit='open -a "Visual Studio Code" ~/sites/dotfiles/.bash_profile'
 alias basheditroot='open -a "Visual Studio Code" ~/.bash_profile'
 # alias bashreset='source ~/sites/dotfiles/.bash_profile'
 alias aliasedit='open -a "Visual Studio Code" ~/sites/dotfiles/.alias'
-alias aliasreset='source -a "Visual Studio Code" ~/sites/dotfiles/.alias'
+alias aliasreset='source ~/sites/dotfiles/.alias'
 alias gitedit='open -a "Visual Studio Code" ~/sites/dotfiles/.gitconfig'
 alias vscedit='code ~/Library/Application\ Support/Code/User/settings.json'
 alias bashhistory='open -a "Visual Studio Code" ~/.bash_history'
@@ -135,9 +144,9 @@ alias nrd='npm run dev'
 alias nrb='npm run build'
 alias nrbs='npm run build && npm run start'
 alias nre='npm run export'
-alias reyarn='rm -r -f node_modules/; yarn'
-alias renpm='rm -r package-lock.json && rm -r -f node_modules/; npm i'
-alias rmlock='rm -r package-lock.json'
+alias reyarn='trash yarn.lock && trash node_modules/; yarn'
+alias renpm='trash package-lock.json && trash -f node_modules/; npm i'
+alias rmmodules='find . -name node_modules -type d -prune -exec trash {} +'
 alias npmlistg='npm list -g --depth 0'
 alias npmlistglobal='npm list -g --depth 0'
 alias npmlist='npm list --depth 0'
@@ -160,22 +169,6 @@ linknode() {
 unlinknode() {
     brew unlink --overwrite node@$1 --force
 }
-
-# nvm commands
-# nvm install 8.16.0
-# nvm use 8.16.0
-
-
-# brew commands:
-# brew doctor
-# brew search node
-# brew uninstall node
-# brew uninstall --force node
-# brew prune
-# brew unlink --overwrite node@8 --force
-# brew link --overwrite node@6
-# brew link --overwrite --dry-run node@8 (to show files that will be deleted)
-# brew link --overwrite node@6 --force
 
 # Sneak changes into your previous commit
 # alias sneak='git commit -a --amend --no-edit'
@@ -245,3 +238,31 @@ function openincode() {
     # or do whatever with individual element of the array
   done
 }
+
+# For loop for opening an array of folders in vscode
+function deleteBranches() {
+  declare -a arr1=(
+  "CAI-1096-update-journeys"
+  "CAI-399-self-exclusion"
+  )
+
+  for i in "${arr1[@]}"
+  do
+    git branch -d "$i"
+  done
+}
+
+# nvm commands
+# nvm install 8.16.0
+# nvm use 8.16.0
+
+# brew commands:
+# brew doctor
+# brew search node
+# brew uninstall node
+# brew uninstall --force node
+# brew prune
+# brew unlink --overwrite node@8 --force
+# brew link --overwrite node@6
+# brew link --overwrite --dry-run node@8 (to show files that will be deleted)
+# brew link --overwrite node@6 --force
