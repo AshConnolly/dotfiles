@@ -133,6 +133,9 @@ alias chrome='open -a "Google Chrome" .'
 # Utilities
 alias listall='ls -a -l'
 alias tree="find . -print | sed -e 's;[^/]*/;|____;g;s;____|; |;g'"
+# LOL don't be Jamon, ty Josh Manders - https://github.com/joshmanders/dotfiles/blob/master/config.fish#L49
+# https://twitter.com/jamonholmgren/status/967548502648668161
+alias rm="trash"
 
 # Time data
 alias waketime="sysctl -a |grep waketime"
