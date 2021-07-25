@@ -1,3 +1,5 @@
+#! /usr/bin/env bash
+
 # Git commit, push
 function gcp() {
     git commit -m "[`git rev-parse --abbrev-ref HEAD | grep --only-matching -E 'CAI-[0-9]+'`] $1"
@@ -200,26 +202,26 @@ alias overview='git log --oneline --no-merges'
 # alias publish='git push -u origin $(alias branchname)'
 
 # For loop to open all subdirectories in vscode
-function openfoldersincode() {
-  declare -a dirs
-  i=1
-  for d in */
-  do
-      dirs[i++]="${d%/}"
-  done
-  echo "There are ${#dirs[@]} dirs in the current path."
-  for((i=1;i<=${#dirs[@]};i++))
-  do
-      echo $i "${dirs[i]}"
-      code "${dirs[i]}"
-  done
-  # https://stackoverflow.com/a/4494667/2627434 - select works too for interactive selection
-  # echo "which dir do you want?"
-  # echo -n "> "
-  # read i
-  # echo "you selected ${dirs[$i]}"
-  # cd "${dirs[$i]}"
-}
+# function openfoldersincode() {
+#   declare -a dirs
+#   i=1
+#   for d in */
+#   do
+#       dirs[i++]="${d%/}"
+#   done
+#   echo "There are ${#dirs[@]} dirs in the current path."
+#   for((i=1;i<=${#dirs[@]};i++))
+#   do
+#       echo $i "${dirs[i]}"
+#       code "${dirs[i]}"
+#   done
+#   # https://stackoverflow.com/a/4494667/2627434 - select works too for interactive selection
+#   # echo "which dir do you want?"
+#   # echo -n "> "
+#   # read i
+#   # echo "you selected ${dirs[$i]}"
+#   # cd "${dirs[$i]}"
+# }
 
 # For loop for opening an array of folders in vscode
 function openincode() {
