@@ -1,12 +1,20 @@
 # dotfiles
 
-root bash_profile to be -
+- [install zsh](https://github.com/ohmyzsh/ohmyzsh/wiki/Installing-ZSH)
+- [install oh-my-zsh](https://github.com/ohmyzsh/ohmyzsh) 
+
+## Linking to `.zshrc` config in this repo
+create `~/.zshenv` with the following contents.
 ```
-    source ~/sites/dotfiles/.bash_profile
+ZDOTDIR=~/sites/dotfiles
 ```
-root .gitconfig (name no in this repo) -
+
+## Linking to `.gitconfig` in this repo
+
+create `~/.gitconfig` with the following contents:
 ```
 [include]
     path= ~/sites/dotfiles/.gitconfig
 ```
-confirm settings with `git config user.name`
+Any following information will overwrite data in `~/sites/dotfiles/.gitconfig` - useful for adding work email / work git info.   
+Confirm settings have been overwritten with `git config user.name` etc.
