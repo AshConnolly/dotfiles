@@ -105,7 +105,7 @@ alias hg='history|grep '
 
 # DOCKER
 # alias startdev='cd ~/git/core-local-env && docker-compose up -d'
-alias startdev='cd ~/git/core-local-env && docker-compose up -d consumer_skybet core_web'
+alias startdev='cd ~/git/core-local-env && docker-compose up -d consumer_skybet core_web account_api'
 alias startdevall='cd ~/git/core-local-env && docker-compose up -d account auth_provider consumer_skybet core_web customer_data test_consumer'
 alias stopdev='cd ~/git/core-local-env && docker-compose stop'
 alias downdev='cd ~/git/core-local-env && docker-compose down'
