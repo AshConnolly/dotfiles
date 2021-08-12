@@ -81,6 +81,17 @@ function int() {
   open -a "IntelliJ IDEA.app" "$1"
 }
 
+# https://superuser.com/questions/378726/convert-from-mov-to-mp4-container-format
+function movtomp4() {
+  ffmpeg -i "$1".mov -c copy "$1".mp4
+}
+
+# https://superuser.com/a/1555285
+function movtomp4encode() {
+  ffmpeg -i "$1".mov -c:v libx264 -c:a aac -vf format=yuv420p -movflags +faststart "$1".mp4
+
+}
+
 # Git commands
 alias gs='git status'
 alias gb='git branch'
