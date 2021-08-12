@@ -1,15 +1,14 @@
 # dotfiles
 
-- [install zsh](https://github.com/ohmyzsh/ohmyzsh/wiki/Installing-ZSH)
-- [install oh-my-zsh](https://github.com/ohmyzsh/ohmyzsh) 
+[install oh-my-zsh](https://github.com/ohmyzsh/ohmyzsh) 
 
-## Linking to `.zshrc` config in this repo
+## Linking to `.zshrc` config
 create `~/.zshenv` with the following contents.
 ```
 ZDOTDIR=~/sites/dotfiles
 ```
 
-## Linking to `.gitconfig` in this repo
+## Linking to `.gitconfig`
 
 create `~/.gitconfig` with the following contents:
 ```
