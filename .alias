@@ -2,8 +2,8 @@
 
 # Git commit, push
 function gcp() {
-    git commit -m "[`git rev-parse --abbrev-ref HEAD | grep --only-matching -E 'CAI-[0-9]+'`] $1"
-    # git commit -m "$1"
+    # git commit -m "[`git rev-parse --abbrev-ref HEAD | grep --only-matching -E 'CAI-[0-9]+'`] $1"
+    git commit -m "$1"
     git push
 }
 
