@@ -247,7 +247,7 @@ alias overview='git log --oneline --no-merges'
 #   # cd "${dirs[$i]}"
 # }
 
-# For loop for opening an array of folders in vscode
+# For loop for opening an array of folders in vscode to add them to recent projects quickly
 function openincode() {
   # create array
   declare -a arr1=(
