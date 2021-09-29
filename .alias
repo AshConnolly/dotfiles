@@ -77,6 +77,18 @@ function gdlb () {
     git branch -D "$1"
 }
 
+# github repo clone - if no slash it presumes its a personal directory on ashconnolly github
+function ghrc () {
+    repo="$1"
+    parts=(${(@s:/:)repo}) # echo $parts[1] $parts[2]
+    if [ $parts[2] ] # has slash in string
+    then
+      gh repo clone "$1" && cd "$parts[2]"
+    else
+      gh repo clone "AshConnolly/$1" && cd "$1"
+    fi
+}
+
 function int() {
   open -a "IntelliJ IDEA.app" "$1"
 }
@@ -94,9 +106,11 @@ function movtomp4encode() {
 
 # https://engineering.giphy.com/how-to-make-gifs-with-ffmpeg/
 # https://superuser.com/questions/436056/how-can-i-get-ffmpeg-to-convert-a-mov-to-a-gif
+# usage: "vidtogif hello.mov", "vidtogif hello.mp4" etc
 function vidtogif() {
   str="$1"
-  parts=(${(@s:.:)str})
+  splitChar=":"
+  parts=(${(@s:splitChar:)str})
   # echo $parts
   ffmpeg -ss 00:00:00.000 -i $parts[1].$parts[2] -pix_fmt rgb24 -r 10 $parts[1].gif
 }
