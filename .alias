@@ -113,6 +113,8 @@ function vidtogif() {
   parts=(${(@s:splitChar:)str})
   # echo $parts
   ffmpeg -ss 00:00:00.000 -i $parts[1].$parts[2] -pix_fmt rgb24 -r 10 $parts[1].gif
+  # ffmpeg -ss 00:00:00.000 -i untitled.mov -pix_fmt rgb24 -r 10 untitled.gif
+
 }
 
 # Git commands
