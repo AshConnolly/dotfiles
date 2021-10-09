@@ -3,9 +3,9 @@
 [install oh-my-zsh](https://github.com/ohmyzsh/ohmyzsh) 
 
 ## Linking to `.zshrc` config
-create `~/.zshenv` with the following contents.
+create `~/.zshenv` with the contents `ZDOTDIR=~/sites/dotfiles` by running:
 ```
-ZDOTDIR=~/sites/dotfiles
+echo 'ZDOTDIR=~/sites/dotfiles' > ~/.zshenv
 ```
 
 ## Linking to `.gitconfig`
