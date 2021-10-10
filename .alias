@@ -263,31 +263,18 @@ alias overview='git log --oneline --no-merges'
 #   # cd "${dirs[$i]}"
 # }
 
-# For loop for opening an array of folders in vscode to add them to recent projects quickly
-function openincode() {
-  # create array
-  declare -a arr1=(
-    "sites/test"
-    "sites/test2"
-  )
-
-  #now loop through the above array
-  cd ~
-  for i in "${arr1[@]}"
-  do
-    code "$i"
-    # git branch -d "$i"
-    # or do whatever with individual element of the array
-  done
-}
-
 # For loop for opening an array of folders in vscode
 function deleteBranches() {
   declare -a arr1=(
   "CAI-1096-update-journeys"
   "CAI-399-self-exclusion"
   )
-
+  # vscode stuff
+  #  declare -a arr1=(
+  #   "sites/test"
+  #   "sites/test2"
+  # )
+  #  cd ~
   for i in "${arr1[@]}"
   do
     git branch -d "$i"
