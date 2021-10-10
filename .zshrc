@@ -114,3 +114,7 @@ export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || pr
 
 # Full path in terminal
 PROMPT=${PROMPT/\%c/\%~}
+# Homebrew
+export PATH=/opt/homebrew/bin:$PATH
+
+

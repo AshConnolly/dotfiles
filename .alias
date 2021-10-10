@@ -264,34 +264,13 @@ alias overview='git log --oneline --no-merges'
 # }
 
 # For loop for opening an array of folders in vscode
-function deleteBranches() {
+function loopFunc() {
   declare -a arr1=(
-  "CAI-1096-update-journeys"
-  "CAI-399-self-exclusion"
+  "branch-hello"
+  "branch-goodbye"
   )
-  # vscode stuff
-  #  declare -a arr1=(
-  #   "sites/test"
-  #   "sites/test2"
-  # )
-  #  cd ~
   for i in "${arr1[@]}"
   do
     git branch -d "$i"
   done
 }
-
-# nvm commands
-# nvm install 8.16.0
-# nvm use 8.16.0
-
-# brew commands:
-# brew doctor
-# brew search node
-# brew uninstall node
-# brew uninstall --force node
-# brew prune
-# brew unlink --overwrite node@8 --force
-# brew link --overwrite node@6
-# brew link --overwrite --dry-run node@8 (to show files that will be deleted)
-# brew link --overwrite node@6 --force
