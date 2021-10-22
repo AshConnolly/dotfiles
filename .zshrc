@@ -74,6 +74,7 @@ plugins=(
     git
 )
 
+DISABLE_AUTO_UPDATE=true # always answer no to auto update https://stackoverflow.com/questions/11378607/oh-my-zsh-disable-would-you-like-to-check-for-updates-prompt
 source $ZSH/oh-my-zsh.sh
 
 # import aliases
