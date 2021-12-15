@@ -21,6 +21,15 @@ function gacp() {
     git push
 }
 
+# Git add, commit, push --no-verify
+function gacpnv() {
+    git add .
+    # git commit -m "[`git rev-parse --abbrev-ref HEAD | grep --only-matching -E 'CAI-[0-9]+'`] $1"
+    git commit -a -m "$1"
+    git push --no-verify
+}
+
+
 # Sneak changes into your previous commit and force push remote
 function gacpp() {
     git add .
@@ -158,6 +167,7 @@ alias coredir='cd ~/git/core-local-env'
 
 # File shortcuts
 alias zshreset='source ~/sites/dotfiles/.zshrc'
+alias bashreset='source ~/.bashrc'
 alias bashedit='open -a "Visual Studio Code" ~/sites/dotfiles/.bash_profile'
 alias basheditroot='open -a "Visual Studio Code" ~/.bash_profile'
 alias aliasedit='open -a "Visual Studio Code" ~/sites/dotfiles/.alias'
