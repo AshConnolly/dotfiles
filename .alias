@@ -56,6 +56,14 @@ function gcb() {
     git push --set-upstream origin "$1"
 }
 
+# Git create branch
+function gcbnv() {
+    git fetch
+    git pull
+    git checkout -b "$1"
+    git push --set-upstream origin "$1" --no-verify
+}
+
 # Git create local branch
 function gclb() {
     git fetch
