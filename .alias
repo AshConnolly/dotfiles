@@ -230,6 +230,7 @@ unlinknode() {
 alias stats='git shortlog -sn --all --no-merges'
 # See everything everyone has done recently
 alias overview='git log --oneline --no-merges'
+alias getip='ipconfig getifaddr en0'
 # See everything I have done recently
 # alias recap='git log --oneline --no-merges --author=cashley.connolly@skybettingandgaming.com'
 # See today’s work
