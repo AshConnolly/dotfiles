@@ -56,6 +56,14 @@ function gcb() {
     git push --set-upstream origin "$1"
 }
 
+# Git create branch
+function gcbnv() {
+    git fetch
+    git pull
+    git checkout -b "$1"
+    git push --set-upstream origin "$1" --no-verify
+}
+
 # Git create local branch
 function gclb() {
     git fetch
@@ -230,6 +238,7 @@ unlinknode() {
 alias stats='git shortlog -sn --all --no-merges'
 # See everything everyone has done recently
 alias overview='git log --oneline --no-merges'
+alias getip='ipconfig getifaddr en0'
 # See everything I have done recently
 # alias recap='git log --oneline --no-merges --author=cashley.connolly@skybettingandgaming.com'
 # See today’s work
