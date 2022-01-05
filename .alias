@@ -235,6 +235,9 @@ alias overview='git log --oneline --no-merges'
 # See today’s work
 # alias today='git log --since=\"00:00:00\" --all --no-merges --oneline --author=cashley.connolly@skybettingandgaming.com'
 
+alias restore='lwsm restore'
+alias save='lwsm save'
+
 # alias ll='ls -la'
 
 # Updating git ignore - untracked file removal
