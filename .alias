@@ -142,7 +142,7 @@ function vidtogif() {
 }
 
 # Git commands
-alias gs='git status'
+alias gs='git status -sb'
 alias gb='git branch'
 alias gf='git fetch'
 alias gpull='git pull'
