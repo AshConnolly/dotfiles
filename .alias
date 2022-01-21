@@ -166,19 +166,14 @@ alias gitremoteurl="git config --get remote.origin.url"
 alias hg='history|grep '
 
 # DOCKER
-# alias startdev='cd ~/git/core-local-env && docker-compose up -d'
-alias startdev='cd ~/git/core-local-env && docker-compose up -d consumer_skybet core_web account_api'
-alias startdevall='cd ~/git/core-local-env && docker-compose up -d account auth_provider consumer_skybet core_web customer_data test_consumer'
-alias stopdev='cd ~/git/core-local-env && docker-compose stop'
-alias downdev='cd ~/git/core-local-env && docker-compose down'
 alias dcu='docker-compose up -d'
 alias dcd='docker-compose down'
+alias dcb='docker-compose build'
 alias dcps='docker-compose ps'
 alias dps='docker ps'
 function dcu() {
   docker-compose up "$1"
 }
-alias coredir='cd ~/git/core-local-env'
 
 # File shortcuts
 alias zshreset='source ~/sites/dotfiles/.zshrc'
