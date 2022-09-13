@@ -7,6 +7,13 @@ function gcp() {
     git push
 }
 
+# Git commit, push, --no-verify
+function gcpnv() {
+    # git commit -m "[`git rev-parse --abbrev-ref HEAD | grep --only-matching -E 'CAI-[0-9]+'`] $1"
+    git commit -m "$1"
+    git push --no-verify
+}
+
 # Git add, commit
 function gac() {
     git add .
@@ -159,31 +166,35 @@ alias gpoma='git pull origin main'
 alias gitremoteurl="git config --get remote.origin.url"
 
 # DOCKER
-# alias startdev='cd ~/git/core-local-env && docker-compose up -d'
-alias startdev='cd ~/git/core-local-env && docker-compose up -d consumer_skybet core_web account_api'
-alias startdevall='cd ~/git/core-local-env && docker-compose up -d account auth_provider consumer_skybet core_web customer_data test_consumer'
-alias stopdev='cd ~/git/core-local-env && docker-compose stop'
-alias downdev='cd ~/git/core-local-env && docker-compose down'
 alias dcu='docker-compose up -d'
 alias dcd='docker-compose down'
+alias dcb='docker-compose build'
 alias dcps='docker-compose ps'
 alias dps='docker ps'
 function dcu() {
   docker-compose up "$1"
 }
-alias coredir='cd ~/git/core-local-env'
+function rebuild-dev() {
+  cd  ~/sites/tim-server/
+  ./gradlew build
+  cd  ~/sites/
+  dcd
+  dcb
+  dcu
+}
 
 # File shortcuts
 alias zshreset='source ~/sites/dotfiles/.zshrc'
 alias bashreset='source ~/.bashrc'
-alias bashedit='open -a "Visual Studio Code" ~/sites/dotfiles/.bash_profile'
-alias basheditroot='open -a "Visual Studio Code" ~/.bash_profile'
-alias aliasedit='open -a "Visual Studio Code" ~/sites/dotfiles/.alias'
+alias bashedit='code ~/sites/dotfiles/.bash_profile'
+alias basheditroot='code ~/.bash_profile'
+alias aliasedit='code ~/sites/dotfiles/.alias'
 alias aliasreset='source ~/sites/dotfiles/.alias'
-alias gitedit='open -a "Visual Studio Code" ~/sites/dotfiles/.gitconfig'
+alias gitedit='code ~/sites/dotfiles/.gitconfig'
 alias vscedit='code ~/Library/Application\ Support/Code/User/settings.json'
-alias bashhistory='open -a "Visual Studio Code" ~/.bash_history'
+alias bashhistory='code ~/.bash_history'
 alias chrome='open -a "Google Chrome" .'
+# alias bashedit='open -a "Visual Studio Code" ~/sites/dotfiles/.bash_profile'
 
 # Utilities
 alias listall='ls -a -l'
