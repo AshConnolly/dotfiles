@@ -60,7 +60,7 @@ function gcb() {
     git fetch
     git pull
     git checkout -b "$1"
-    git push --set-upstream origin "$1"
+    git push --set-upstream origin "$1" --no-verify
 }
 
 # Git create branch
@@ -149,7 +149,7 @@ alias gf='git fetch'
 alias gpull='git pull'
 alias gpush='git push'
 alias gd="git diff -- . ':(exclude)*package-lock.json' ':(exclude)*yarn.lock'"
-alias gl="git log -n10 --pretty=format:'%Cred%h %Cgreen%ad %Cblue%an %Creset%s' --date='format:%y.%m.%d %H:%M'"
+alias gl="git log -n100 --pretty=format:'%Cred%h %Cgreen%ad %Cblue%an %Creset%s' --date='format:%y.%m.%d %H:%M'"
 alias glf="git log -n10 --pretty=format:'%Cred%h %Cgreen%ad %Cblue%an %Creset%s' --numstat --date='format:%y.%m.%d %H:%M'"
 alias gst='git stash'
 alias gstp='git stash pop'
@@ -166,22 +166,21 @@ alias gpoma='git pull origin main'
 alias gitremoteurl="git config --get remote.origin.url"
 
 # DOCKER
-alias dcu='docker-compose up -d'
+alias dcu='docker-compose up'
+alias dcud='docker-compose up -d'
 alias dcd='docker-compose down'
 alias dcb='docker-compose build'
 alias dcps='docker-compose ps'
 alias dps='docker ps'
+alias di='docker images'
+
 function dcu() {
   docker-compose up "$1"
 }
-function rebuild-dev() {
-  cd  ~/sites/tim-server/
-  ./gradlew build
-  cd  ~/sites/
-  dcd
-  dcb
-  dcu
-}
+
+alias dk='docker kill $(docker ps -q)' # Kill all Running Containers
+alias drm='docker rm $(docker ps -a -q)' # Remove all stopped Containers
+# docker exec -i -t -u root <container_name> /bin/sh # Shell into container as root
 
 # File shortcuts
 alias zshreset='source ~/sites/dotfiles/.zshrc'
@@ -201,7 +200,7 @@ alias listall='ls -a -l'
 alias tree="find . -print | sed -e 's;[^/]*/;|____;g;s;____|; |;g'"
 # LOL don't be Jamon, ty Josh Manders - https://github.com/joshmanders/dotfiles/blob/master/config.fish#L49
 # https://twitter.com/jamonholmgren/status/967548502648668161
-alias rm="trash"
+ alias rm="trash"
 
 # Time data
 alias waketime="sysctl -a |grep waketime"
