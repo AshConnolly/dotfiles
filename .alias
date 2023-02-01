@@ -113,10 +113,6 @@ function ghrc () {
     fi
 }
 
-function int() {
-  open -a "IntelliJ IDEA.app" "$1"
-}
-
 # https://superuser.com/questions/378726/convert-from-mov-to-mp4-container-format
 function movtomp4() {
   ffmpeg -i "$1".mov -c copy "$1".mp4
@@ -138,7 +134,6 @@ function vidtogif() {
   # echo $parts
   ffmpeg -ss 00:00:00.000 -i $parts[1].$parts[2] -pix_fmt rgb24 -r 10 $parts[1].gif
   # ffmpeg -ss 00:00:00.000 -i untitled.mov -pix_fmt rgb24 -r 10 untitled.gif
-
 }
 
 # Git commands
@@ -196,6 +191,13 @@ alias chrome='open -a "Google Chrome" .'
 # alias bashedit='open -a "Visual Studio Code" ~/sites/dotfiles/.bash_profile'
 
 # Utilities
+alias kill3000='kill -9 $(lsof -t -i:3000)'
+alias list3000='lsof -i tcp:3000'
+function killpid() {
+  kill -9 "$1"
+}
+# https://stackoverflow.com/questions/3855127/find-and-kill-process-locking-port-3000-on-mac
+
 alias listall='ls -a -l'
 alias tree="find . -print | sed -e 's;[^/]*/;|____;g;s;____|; |;g'"
 # LOL don't be Jamon, ty Josh Manders - https://github.com/joshmanders/dotfiles/blob/master/config.fish#L49
@@ -264,7 +266,8 @@ alias save='lwsm save'
 # Other
 alias hg='history|grep '
 alias tsc='npx tsc --jsx preserve -t es2020 --outDir js --noEmit false'
-
+alias hidesysprefsbadge='defaults write com.apple.systempreferences AttentionPrefBundleIDs 0 && killall Dock'
+alias showsysprefsbadge='defaults write com.apple.systempreferences AttentionPrefBundleIDs 1 && killall Dock'
 
 # alias ll='ls -la'
 
