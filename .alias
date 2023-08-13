@@ -1,5 +1,10 @@
 #! /usr/bin/env bash
 
+# code shortcut
+function code() {
+    code-insiders "$1"
+}
+
 # Git commit, push
 function gcp() {
     # git commit -m "[`git rev-parse --abbrev-ref HEAD | grep --only-matching -E 'CAI-[0-9]+'`] $1"
@@ -113,28 +118,6 @@ function ghrc () {
     fi
 }
 
-# https://superuser.com/questions/378726/convert-from-mov-to-mp4-container-format
-function movtomp4() {
-  ffmpeg -i "$1".mov -c copy "$1".mp4
-}
-
-# https://superuser.com/a/1555285
-function movtomp4encode() {
-  ffmpeg -i "$1".mov -c:v libx264 -c:a aac -vf format=yuv420p -movflags +faststart "$1".mp4
-
-}
-
-# https://engineering.giphy.com/how-to-make-gifs-with-ffmpeg/
-# https://superuser.com/questions/436056/how-can-i-get-ffmpeg-to-convert-a-mov-to-a-gif
-# usage: "vidtogif hello.mov", "vidtogif hello.mp4" etc
-function vidtogif() {
-  str="$1"
-  splitChar=":"
-  parts=(${(@s:splitChar:)str})
-  # echo $parts
-  ffmpeg -ss 00:00:00.000 -i $parts[1].$parts[2] -pix_fmt rgb24 -r 10 $parts[1].gif
-  # ffmpeg -ss 00:00:00.000 -i untitled.mov -pix_fmt rgb24 -r 10 untitled.gif
-}
 
 # Git commands
 # alias gs='git status -sb'
@@ -159,6 +142,7 @@ alias gcma='git checkout main'
 alias gpom='git pull origin master'
 alias gpoma='git pull origin main'
 alias gitremoteurl="git config --get remote.origin.url"
+alias pushbranch='git push --set-upstream --no-verify origin $(git rev-parse --abbrev-ref HEAD)'
 
 # DOCKER
 alias dcu='docker-compose up'
@@ -269,6 +253,54 @@ alias tsc='npx tsc --jsx preserve -t es2020 --outDir js --noEmit false'
 alias hidesysprefsbadge='defaults write com.apple.systempreferences AttentionPrefBundleIDs 0 && killall Dock'
 alias showsysprefsbadge='defaults write com.apple.systempreferences AttentionPrefBundleIDs 1 && killall Dock'
 
+
+#
+# File conversion
+#
+
+# https://superuser.com/questions/378726/convert-from-mov-to-mp4-container-format
+function movtomp4() {
+  ffmpeg -i "$1".mov -c copy "$1".mp4
+  # ffmpeg -i my-video.mov -vcodec h264 -acodec mp2 my-video.mp4
+}
+
+# https://superuser.com/a/1555285
+function movtomp4encode() {
+  ffmpeg -i "$1".mov -c:v libx264 -c:a aac -vf format=yuv420p -movflags +faststart "$1".mp4
+}
+
+# https://engineering.giphy.com/how-to-make-gifs-with-ffmpeg/
+# https://superuser.com/questions/436056/how-can-i-get-ffmpeg-to-convert-a-mov-to-a-gif
+# usage: "vidtogif hello.mov", "vidtogif hello.mp4" etc
+function vidtogif() {
+  str="$1"
+  splitChar=":"
+  parts=(${(@s:splitChar:)str})
+  # echo $parts
+  ffmpeg -ss 00:00:00.000 -i $parts[1].$parts[2] -pix_fmt rgb24 -r 10 $parts[1].gif
+  # ffmpeg -ss 00:00:00.000 -i untitled.mov -pix_fmt rgb24 -r 10 untitled.gif
+}
+
+function pngToWebp() {
+  cwebp -q 75 "$1".png -o "$1".webp
+}
+
+function pngsToWebp() {
+  # https://www.smashingmagazine.com/2018/07/converting-images-to-webp/
+  # https://stackoverflow.com/a/7119316 get file without extension
+  for file in *.png; do
+  filename=${file%%.*}
+  cwebp -q 75 $filename.png -o $filename.webp;
+  done
+}
+
+alias pngsToJpg='mogrify -format jpg *.png -quality 85%'
+
+function pngsToWebpAndJpg() {
+  pngsToWebp
+  pngsToJpg
+}
+
 # alias ll='ls -la'
 
 # Updating git ignore - untracked file removal
@@ -318,3 +350,11 @@ function loopFunc() {
     git branch -d "$i"
   done
 }
+
+# https://unix.stackexchange.com/questions/19654/how-do-i-change-the-extension-of-multiple-files
+# renaming - not needed
+  # for file2 in *.webp;
+  # do
+  # echo $file2
+  #  mv -- "$file2" "${file2%.png.webp}.webp"
+  # done
