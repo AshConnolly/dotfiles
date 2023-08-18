@@ -281,9 +281,27 @@ function vidtogif() {
   # ffmpeg -ss 00:00:00.000 -i untitled.mov -pix_fmt rgb24 -r 10 untitled.gif
 }
 
-function pngToWebp() {
-  cwebp -q 75 "$1".png -o "$1".webp
+function generateSiteImages() {
+  # from /fullsize directory
+  mkdir -p ../thumbnails
+
+  # webp
+  for file in *.png; do
+  filename=${file%%.*}
+  cwebp -q 75 $filename.png -o ../$filename.webp;
+  done
+  # webp thumbnails
+  for file in *.png; do
+  filename=${file%%.*}
+  cwebp -q 75 $filename.png -o ../thumbnails/$filename.webp -resize 200 0;
+  done
+
+  # jpgs
+  mogrify -path ../ -format jpg -quality 85 *.png
+  # jpg thumbnails
+  mogrify -path ../thumbnails -resize 200 -format jpg -quality 80 *.png
 }
+# https://stackoverflow.com/a/27920288
 
 function pngsToWebp() {
   # https://www.smashingmagazine.com/2018/07/converting-images-to-webp/
@@ -294,12 +312,22 @@ function pngsToWebp() {
   done
 }
 
+function pngsToWebpThumbnails() {
+  mkdir -p ./thumbnails
+  for file in *.png; do
+  filename=${file%%.*}
+  cwebp -q 75 $filename.png -o ./thumbnails/$filename.webp -resize 200 0;
+  done
+}
+
+function pngsToJpgThumbnails() {
+  mkdir -p ./thumbnails
+  # argument order is important
+  mogrify -path ./thumbnails -resize 200 -format jpg -quality 80 *.png
+}
+
 alias pngsToJpg='mogrify -format jpg *.png -quality 85%'
 
-function pngsToWebpAndJpg() {
-  pngsToWebp
-  pngsToJpg
-}
 
 # alias ll='ls -la'
 

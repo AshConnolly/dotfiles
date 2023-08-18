@@ -19,21 +19,25 @@
 [push]
 	default = simple
 
+# [color]
+#     branch = auto
+#     diff = auto
+#     status = auto
+
+# [color "diff"]
+#     # meta = yellow bold
+#     frag = magenta bold
+#     old = red bold
+#     new = green bold
+
+# diff-so-fancy --------
 [color]
-    branch = auto
-    diff = auto
-    status = auto
+	ui = true
 
 [color "branch"]
     current = yellow reverse
     local = yellow
     remote = green
-
-[color "diff"]
-    # meta = yellow bold
-    frag = magenta bold
-    old = red bold
-    new = green bold
 
 [color "status"]
     added = green bold
@@ -41,3 +45,24 @@
     removed = red bold
     untracked = green bold
 
+[color "diff-highlight"]
+	oldNormal = red bold
+	oldHighlight = red bold 52
+	newNormal = green bold
+	newHighlight = green bold 22
+
+[color "diff"]
+	meta = 11
+	frag = magenta bold
+	func = 146 bold
+	commit = yellow bold
+	old = red bold
+	new = green bold
+	whitespace = red reverse
+
+[core]
+	pager = diff-so-fancy | less --tabs=4 -RFX
+
+[interactive]
+	diffFilter = diff-so-fancy --patch
+# diff-so-fancy ---------
