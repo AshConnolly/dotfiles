@@ -2,7 +2,8 @@
 
 # code shortcut
 function code() {
-    code-insiders "$1"
+    # code-insiders "$1"
+    open -a "Cursor" "$1"
 }
 
 # Git commit, push
