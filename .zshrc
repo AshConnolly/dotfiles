@@ -77,6 +77,10 @@ plugins=(
 DISABLE_AUTO_UPDATE=true # always answer no to auto update https://stackoverflow.com/questions/11378607/oh-my-zsh-disable-would-you-like-to-check-for-updates-prompt
 source $ZSH/oh-my-zsh.sh
 
+# remove alias from ohmyzsh git plugin
+# https://github.com/ohmyzsh/ohmyzsh/blob/master/plugins/git/git.plugin.zsh#L193
+unalias gc
+
 # import aliases
 source ~/sites/dotfiles/.alias
 # alias test='git status'
