@@ -85,10 +85,32 @@ function gclb() {
 }
 
 # Git checkout
-# note: ohmyzsh git plugin alias removed in .zshrc
+unalias gc # note: ohmyzsh git plugin alias removed in .zshrc
 function gc() {
   echo "Checking out $1"
   git checkout "$1"
+}
+
+# Git branch search with interactive selection
+unalias gbs # unset ohmyzsh alias
+function gbs() {
+    # Get all branches (local and remote), filter by search term, remove HEAD ref, remove 'remote/origin/', remove '*' from current branch,
+    # remove spaces, sort uniquely and store in array
+    local branches=($(git branch -a | grep -i "$1" | grep -v "^.*HEAD" | sed 's/remotes\/origin\///' | sed 's/\*/ /' | tr -d ' ' | sort -u))
+    if [ ${#branches[@]} -eq 0 ]; then
+        echo "No matching branches found"
+        return 1
+    fi
+
+    echo "Select a branch to checkout:"
+    select branch in "${branches[@]}"; do
+        if [ -n "$branch" ]; then
+            git checkout "$branch"
+            break
+        else
+            echo "Invalid selection"
+        fi
+    done
 }
 
 # git delete local & remote branch
@@ -244,7 +266,7 @@ alias overview='git log --oneline --no-merges'
 alias getip='ipconfig getifaddr en0'
 # See everything I have done recently
 # alias recap='git log --oneline --no-merges --author=cashley.connolly@skybettingandgaming.com'
-# See today’s work
+# See today's work
 # alias today='git log --since=\"00:00:00\" --all --no-merges --oneline --author=cashley.connolly@skybettingandgaming.com'
 
 alias restore='lwsm restore'
