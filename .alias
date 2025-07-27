@@ -91,6 +91,11 @@ function gc() {
   git checkout "$1"
 }
 
+# git create remote repo and push current branch
+function gcrp() {
+  gh repo create "$1" --private --source=. --remote=origin --push
+}
+
 # Git branch search with interactive selection
 unalias gbs # unset ohmyzsh alias
 function gbs() {
@@ -151,7 +156,7 @@ alias gb='git branch --sort=-committerdate'
 alias gf='git fetch'
 alias gpull='git pull'
 alias gpush='git push'
-alias gd="git diff -- . ':(exclude)*package-lock.json' ':(exclude)*yarn.lock'"
+alias gd="git diff -- . ':(exclude)*package-lock.json' ':(exclude)*yarn.lock' ':(exclude)*pnpm-lock.yaml'"
 alias gl="git log -n100 --pretty=format:'%Cred%h %Cgreen%ad %Cblue%an %Creset%s' --date='format:%y.%m.%d %H:%M'"
 alias glf="git log -n10 --pretty=format:'%Cred%h %Cgreen%ad %Cblue%an %Creset%s' --numstat --date='format:%y.%m.%d %H:%M'"
 alias gst='git stash'
