@@ -14,7 +14,7 @@
 	c = "!f() { git commit -S -m \"$*\"; }; f"
 
 [credential]
-	# helper = osxkeychain
+	helper = osxkeychain
 
 [push]
 	default = simple
