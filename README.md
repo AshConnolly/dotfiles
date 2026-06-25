@@ -12,8 +12,9 @@ echo 'ZDOTDIR=~/sites/dotfiles' > ~/.zshenv
 
 create `~/.gitconfig` that links to the one in this repo:
 ```
-[include]
-    path= ~/sites/dotfiles/.gitconfig
+echo '[include]
+    path= ~/sites/dotfiles/.gitconfig' > ~/.gitconfig
+
 ```
 Any following information will overwrite data in `~/sites/dotfiles/.gitconfig` - useful for adding work email / work git info.   
 Confirm settings have been overwritten with `git config user.name` etc.

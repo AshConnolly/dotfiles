@@ -85,7 +85,7 @@ function gclb() {
 }
 
 # Git checkout
-unalias gc # note: ohmyzsh git plugin alias removed in .zshrc
+# unalias gc # note: ohmyzsh git plugin alias removed in .zshrc
 function gc() {
   echo "Checking out $1"
   git checkout "$1"
@@ -97,7 +97,7 @@ function gcrp() {
 }
 
 # Git branch search with interactive selection
-unalias gbs # unset ohmyzsh alias
+# unalias gbs # unset ohmyzsh alias
 function gbs() {
     # Get all branches (local and remote), filter by search term, remove HEAD ref, remove 'remote/origin/', remove '*' from current branch,
     # remove spaces, sort uniquely and store in array
