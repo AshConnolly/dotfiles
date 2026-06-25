@@ -5,7 +5,7 @@
 ## Linking to `.zshrc` config
 create `~/.zshenv` that inits zsh from this repo:
 ```
-echo 'ZDOTDIR=~/sites/dotfiles' > ~/.zshenv
+echo 'export ZDOTDIR=$HOME/sites/dotfiles' > ~/.zshenv
 ```
 
 ## Linking to `.gitconfig`
